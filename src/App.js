@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Result from './containers/Results';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import background from './assets/bg.jpg';
+import reducers from './reducers';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const styles = {
+  app:{
+    background:`url(${background})`,
+    backgroundSize: 'contain',
+    height: '100vh',
+    color: 'white',
+    padding: '50px',
+  }
+}
+
+const store = createStore(reducers);
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <div className="App" style={styles.app}>
+          <div className="App-intro">
+            <Result />
+          </div>
+        </div>
+      </Provider>
+
+    );
+  }
 }
 
 export default App;
